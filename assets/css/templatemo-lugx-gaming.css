@@ -1296,6 +1296,12 @@ Shop Page Style
   background-color: #0071f8;
 }
 
+.trending-box::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .trending ul.pagination {
   margin-top: 50px;
   text-align: center;
