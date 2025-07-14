@@ -5,10 +5,9 @@ let currentPage = 1;
 let currentTag = '';
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Initial load
   loadGames(currentPage, currentTag);
 
-  // Setup tag filter click listeners
+  // Tag Filter Clicks
   const tagFilter = document.getElementById("tag-filter");
   tagFilter.querySelectorAll("a").forEach(anchor => {
     anchor.addEventListener("click", (e) => {
@@ -32,7 +31,6 @@ function updateActiveTag(tag) {
 }
 
 function loadGames(page = 1, tag = '') {
-  console.log(`Loading page: ${page}, tag: "${tag}"`);
   const url = `${BASE_URL}?page=${page}&per_page=${perPage}${tag ? `&tag=${encodeURIComponent(tag)}` : ''}`;
 
   fetch(url)
@@ -73,7 +71,7 @@ function renderGames(games) {
             <a href="product-details.html?game_id=${encodeURIComponent(game.game_id)}">
               <img src="${game.image_url}" alt="${escapeHtml(game.title)}" />
             </a>
-            <span class="price"><em>$${game.original_price.toFixed(2)}</em>$${game.price.toFixed(2)}</span>
+            <span class="price"><em>$${game.original_price.toFixed(2)}</em> $${game.price.toFixed(2)}</span>
           </div>
           <div class="down-content">
             <span class="category">${escapeHtml(game.category)}</span>
@@ -91,9 +89,7 @@ function renderGames(games) {
 }
 
 function renderPagination(currentPage, totalPages) {
-  console.log(`Rendering pagination: currentPage=${currentPage}, totalPages=${totalPages}`);
   const pagination = document.getElementById("pagination");
-  console.log("Pagination element:", document.getElementById("pagination"));
   pagination.innerHTML = "";
 
   // Prev button
@@ -108,7 +104,7 @@ function renderPagination(currentPage, totalPages) {
   });
   pagination.appendChild(prevLi);
 
-  // Page numbers (show max 7 pages with current page centered)
+  // Page numbers (show max 7 pages centered)
   const maxPagesToShow = 7;
   let startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
   let endPage = startPage + maxPagesToShow - 1;
@@ -144,23 +140,16 @@ function renderPagination(currentPage, totalPages) {
   pagination.appendChild(nextLi);
 }
 
-// Simple helper to escape HTML in text to prevent XSS
 function escapeHtml(text) {
   if (!text) return "";
   return text.replace(/[&<>"']/g, (m) => {
     switch (m) {
-      case "&":
-        return "&amp;";
-      case "<":
-        return "&lt;";
-      case ">":
-        return "&gt;";
-      case '"':
-        return "&quot;";
-      case "'":
-        return "&#039;";
-      default:
-        return m;
+      case "&": return "&amp;";
+      case "<": return "&lt;";
+      case ">": return "&gt;";
+      case '"': return "&quot;";
+      case "'": return "&#039;";
+      default: return m;
     }
   });
 }
