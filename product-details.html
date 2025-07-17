@@ -79,10 +79,21 @@
         <h4 id="game-title"></h4>
         <span class="price"><em id="original-price"></em> <span id="price"></span></span>
         <p id="short-description"></p>
-        <form id="qty" action="#">
-          <input type="qty" class="form-control" id="1" aria-describedby="quantity" placeholder="1">
-          <button type="submit"><i class="fa fa-shopping-bag"></i> ADD TO CART</button>
+
+        <form id="cart-form">
+          <input
+                  type="number"
+                  class="form-control mb-3"
+                  id="quantity"
+                  value="1"
+                  min="1"
+                  aria-label="Quantity"
+          />
+          <button type="submit" class="btn btn-primary">
+            <i class="fa fa-shopping-bag"></i> ADD TO CART
+          </button>
         </form>
+
         <ul>
           <li><span>Game ID:</span> <span id="game-id"></span></li>
           <li><span>Genre:</span> <span id="genre-tags"></span></li>
@@ -139,6 +150,31 @@
   </div>
 </footer>
 
+<!-- Sign-In Modal -->
+<div
+        id="signinModal"
+        style="
+      display: none;
+      position: fixed;
+      top: 30%;
+      left: 40%;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      z-index: 9999;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+    "
+>
+  <h5>Sign In</h5>
+  <input
+          type="text"
+          id="usernameInput"
+          placeholder="Enter your username"
+          class="form-control mb-2"
+  />
+  <button onclick="saveUsername()" class="btn btn-primary">Sign In</button>
+</div>
+
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/js/isotope.min.js"></script>
@@ -147,6 +183,7 @@
 <script src="assets/js/custom.js"></script>
 <script src="assets/js/load-game.js"></script>
 <script src="assets/js/analytics.js"></script>
+<script src="assets/js/cart.js"></script>
 
 </body>
 </html>
