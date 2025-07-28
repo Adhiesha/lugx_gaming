@@ -1,4 +1,4 @@
-const BASE_URL = "http://127.0.0.1:5001/games";
+const GAME_BASE_URL = window.__ENV__?.GAMES_ENDPOINT || 'http://127.0.0.1:5001/games';
 const perPage = 8;
 
 let currentPage = 1;
@@ -31,7 +31,7 @@ function updateActiveTag(tag) {
 }
 
 function loadGames(page = 1, tag = '') {
-  const url = `${BASE_URL}?page=${page}&per_page=${perPage}${tag ? `&tag=${encodeURIComponent(tag)}` : ''}`;
+  const url = `${GAME_BASE_URL}?page=${page}&per_page=${perPage}${tag ? `&tag=${encodeURIComponent(tag)}` : ''}`;
 
   fetch(url)
     .then((res) => {

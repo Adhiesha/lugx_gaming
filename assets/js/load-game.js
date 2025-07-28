@@ -1,4 +1,4 @@
-const BASE_URL = "http://127.0.0.1:5001/games";
+const GAME_BASE_URL = window.__ENV__?.GAMES_ENDPOINT || 'http://127.0.0.1:5001/games';
 
 // Get the game_id from the URL query string
 function getGameIdFromURL() {
@@ -33,7 +33,7 @@ function loadProductDetails() {
   console.log("Get Game:", gameId);
   if (!gameId) return;
 
-  fetch(`${BASE_URL}/${encodeURIComponent(gameId)}`)
+  fetch(`${GAME_BASE_URL}/${encodeURIComponent(gameId)}`)
     .then(res => {
       if (!res.ok) throw new Error("Failed to fetch game details.");
       return res.json();

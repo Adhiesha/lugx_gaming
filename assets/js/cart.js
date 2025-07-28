@@ -1,4 +1,5 @@
-const CART_BASE_URL = "http://127.0.0.1:5004/orders";
+const CART_BASE_URL = window.__ENV__?.CART_ENDPOINT || 'http://127.0.0.1:5004/orders';
+
 
 function showSignIn() {
   document.getElementById("signinModal").style.display = "block";

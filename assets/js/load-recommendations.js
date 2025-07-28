@@ -1,4 +1,4 @@
-const BASE_URL = "http://127.0.0.1:5002/recommendations";
+const RECOMMENDATION_BASE_URL = window.__ENV__?.RECOMMENDATION_ENDPOINT || 'http://127.0.0.1:5002/recommendations';
 
 function createGameCard(game, type = "trending") {
   const detailLink = `product-details.html?game_id=${encodeURIComponent(game.game_id)}`;
@@ -42,7 +42,7 @@ function loadSection(endpoint, containerId, cardType = "trending") {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  loadSection(`${BASE_URL}/trending?k=4`, "trending-games", "trending");
-  loadSection(`${BASE_URL}/most_played?k=6`, "most-played", "most_played");
-  loadSection(`${BASE_URL}/top_categories?k=5`, "top-categories", "category");
+  loadSection(`${RECOMMENDATION_BASE_URL}/trending?k=4`, "trending-games", "trending");
+  loadSection(`${RECOMMENDATION_BASE_URL}/most_played?k=6`, "most-played", "most_played");
+  loadSection(`${RECOMMENDATION_BASE_URL}/top_categories?k=5`, "top-categories", "category");
 });

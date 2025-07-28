@@ -1,8 +1,9 @@
 (function () {
-  const endpoint = 'http://127.0.0.1:5003/track';
+  const TRACKING_BASE_URL = window.__ENV__?.TRACKING_ENDPOINT || 'http://localhost:5003/track';
+
 
   const sendEvent = (eventType, payload) => {
-    fetch(endpoint, {
+    fetch(TRACKING_BASE_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
