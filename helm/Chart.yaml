@@ -1,0 +1,6 @@
+apiVersion: v2
+name: lugx-game
+description: Helm chart for Lugx Gaming frontend (static Nginx site)
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
