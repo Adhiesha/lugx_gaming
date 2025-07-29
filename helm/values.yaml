@@ -12,17 +12,50 @@ service:
 ingress:
   enabled: true
   className: nginx
-  annotations: {}
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
   hosts:
     - host: lugx.minikube.local
       paths:
         - path: /
           pathType: Prefix
-  tls: []
+  tls:
+    - hosts:
+        - lugx.minikube.local
+      secretName: api-lugx-tls
+
+backendIngress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+  tls:
+    - hosts:
+        - api.lugx.minikube.local
+      secretName: api-lugx-tls
+  host: api.lugx.minikube.local
+  paths:
+    - path: /games
+      pathType: Prefix
+      serviceName: game-service-backend
+      servicePort: 5001
+    - path: /orders
+      pathType: Prefix
+      serviceName: order-service-backend
+      servicePort: 5004
+    - path: /recommendations
+      pathType: Prefix
+      serviceName: recommendation-service-backend
+      servicePort: 5002
+    - path: /track
+      pathType: Prefix
+      serviceName: tracking-service-backend
+      servicePort: 5003
 
 env:
-  TRACKING_ENDPOINT: http://tracking-service.default.svc.cluster.local:5003/track
-  CART_ENDPOINT: http://order-service.default.svc.cluster.local:5004/orders
-  GAMES_ENDPOINT: http://game-service-backend.default.svc.cluster.local:5001/games
-  RECOMMENDATION_ENDPOINT: http://recommendation-service.default.svc.cluster.local:5002/recommendations
+  TRACKING_ENDPOINT: https://api.lugx.minikube.local/track
+  CART_ENDPOINT: https://api.lugx.minikube.local/orders
+  GAMES_ENDPOINT: https://api.lugx.minikube.local/games
+  RECOMMENDATION_ENDPOINT: https://api.lugx.minikube.local/recommendations
+
 
