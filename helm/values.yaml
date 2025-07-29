@@ -21,8 +21,8 @@ ingress:
   tls: []
 
 env:
-  TRACKING_ENDPOINT: "http://tracking-service.default.svc.cluster.local:5003/track"
-  CART_ENDPOINT: "http://order-service.default.svc.cluster.local:5004/orders"
-  GAMES_ENDPOINT: "http://game-service-backend.default.svc.cluster.local:5001/games"
-  RECOMMENDATION_ENDPOINT: "http://recommendation-service.default.svc.cluster.local:5002/recommendations"
+  TRACKING_ENDPOINT: http://tracking-service.default.svc.cluster.local:5003/track
+  CART_ENDPOINT: http://order-service.default.svc.cluster.local:5004/orders
+  GAMES_ENDPOINT: http://game-service-backend.default.svc.cluster.local:5001/games
+  RECOMMENDATION_ENDPOINT: http://recommendation-service.default.svc.cluster.local:5002/recommendations
 
