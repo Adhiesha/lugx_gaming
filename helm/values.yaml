@@ -52,10 +52,10 @@ backendIngress:
       serviceName: analytics-service-backend
       servicePort: 5003
 
-env:
-  TRACKING_ENDPOINT: https://api.lugx.minikube.local/track
-  CART_ENDPOINT: https://api.lugx.minikube.local/orders
-  GAMES_ENDPOINT: https://api.lugx.minikube.local/games
-  RECOMMENDATION_ENDPOINT: https://api.lugx.minikube.local/recommendations
+endpoints:
+  analytics: https://api.lugx.minikube.local/track
+  orders: https://api.lugx.minikube.local/orders
+  games: https://api.lugx.minikube.local/games
+  recommendations: https://api.lugx.minikube.local/recommendations
 
 

@@ -5,8 +5,8 @@ metadata:
 data:
   env.js: |
     window.__ENV__ = {
-      TRACKING_ENDPOINT: {{ .Values.env.TRACKING_ENDPOINT | quote }},
-      CART_ENDPOINT: {{ .Values.env.CART_ENDPOINT | quote }},
-      GAMES_ENDPOINT: {{ .Values.env.GAMES_ENDPOINT | quote }},
-      RECOMMENDATION_ENDPOINT: {{ .Values.env.RECOMMENDATION_ENDPOINT | quote }}
+      TRACKING_ENDPOINT: {{ .Values.endpoints.analytics | quote }},
+      CART_ENDPOINT: {{ .Values.endpoints.orders | quote }},
+      GAMES_ENDPOINT: {{ .Values.endpoints.games | quote }},
+      RECOMMENDATION_ENDPOINT: {{ .Values.endpoints.recommendations | quote }}
     };
