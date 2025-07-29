@@ -49,7 +49,7 @@ backendIngress:
       servicePort: 5002
     - path: /track
       pathType: Prefix
-      serviceName: tracking-service-backend
+      serviceName: analytics-service-backend
       servicePort: 5003
 
 env:
