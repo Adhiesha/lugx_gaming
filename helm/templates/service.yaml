@@ -7,9 +7,22 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: 80
-      targetPort: 80
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
       protocol: TCP
       name: http
   selector:
     app: {{ .Release.Name }}-frontend
+---
+{{- if .Values.backendIngress.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.backendIngress.service.name }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ .Values.backendIngress.service.name }}
+  ports:
+    - port: {{ .Values.backendIngress.service.port }}
+      targetPort: {{ .Values.backendIngress.service.port }}

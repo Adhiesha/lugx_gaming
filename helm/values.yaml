@@ -6,51 +6,42 @@ image:
   pullPolicy: Always
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 80
+  targetPort: 80
 
-ingress:
+uiIngress:
   enabled: true
   className: nginx
   annotations:
     nginx.ingress.kubernetes.io/enable-cors: "true"
-  hosts:
-    - host: lugx.minikube.local
-      paths:
-        - path: /
-          pathType: Prefix
+  paths:
+    - path: /
+      pathType: Prefix
   tls:
-    - hosts:
-        - lugx.minikube.local
-      secretName: api-lugx-tls
+    enabled: false  # You can toggle this to true and set secretName
 
 backendIngress:
   enabled: true
   className: nginx
   annotations:
     nginx.ingress.kubernetes.io/enable-cors: "true"
-  tls:
-    - hosts:
-        - api.lugx.minikube.local
-      secretName: api-lugx-tls
-  host: api.lugx.minikube.local
-  paths:
+  service:
+    name: api-gateway
+    port: 80
+  routes:
     - path: /games
-      pathType: Prefix
-      serviceName: game-service-backend
-      servicePort: 5001
+      targetService: game-service-backend
+      targetPort: 5001
     - path: /orders
-      pathType: Prefix
-      serviceName: order-service-backend
-      servicePort: 5004
+      targetService: order-service-backend
+      targetPort: 5004
     - path: /recommendations
-      pathType: Prefix
-      serviceName: recommendation-service-backend
-      servicePort: 5002
+      targetService: recommendation-service-backend
+      targetPort: 5002
     - path: /track
-      pathType: Prefix
-      serviceName: analytics-service-backend
-      servicePort: 5003
+      targetService: analytics-service-backend
+      targetPort: 5003
 
 endpoints:
   analytics: https://api.lugx.minikube.local/track
