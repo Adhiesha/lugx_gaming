@@ -13,7 +13,9 @@ spec:
       name: http
   selector:
     app: {{ .Release.Name }}-frontend
+
 ---
+
 {{- if .Values.backendIngress.enabled }}
 apiVersion: v1
 kind: Service
@@ -26,3 +28,6 @@ spec:
   ports:
     - port: {{ .Values.backendIngress.service.port }}
       targetPort: {{ .Values.backendIngress.service.port }}
+      protocol: TCP
+      name: http
+  {{- end }}
