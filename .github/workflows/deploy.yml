@@ -2,10 +2,11 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, release, develop ]
 
 env:
   IMAGE_NAME: adeeshadev/lugx-gaming-ui
+  IMAGE_TAG: ${{ github.ref_name == 'master' && 'latest' || github.ref_name == 'release' && 'stage_latest' || 'dev_latest' }}
 
 jobs:
   build-and-push:
