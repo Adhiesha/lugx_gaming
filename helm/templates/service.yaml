@@ -16,11 +16,13 @@ spec:
 
 ---
 
-{{- if .Values.backendIngress.enabled }}
+  {{- if .Values.backendIngress.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.backendIngress.service.name }}
+  labels:
+    app: {{ .Values.backendIngress.service.name }}
 spec:
   type: {{ .Values.service.type }}
   selector:

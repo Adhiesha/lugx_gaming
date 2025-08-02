@@ -18,16 +18,21 @@ spec:
             pathType: {{ .pathType }}
             backend:
               service:
-                name: lugx-ui
+                name: {{ $.Release.Name }}-frontend
                 port:
                   number: {{ $.Values.service.port }}
           {{- end }}
+  {{- if .Values.uiIngress.tls.enabled }}
+  tls:
+    - hosts:
+        - {{ .Values.uiIngress.tls.host }}
+      secretName: {{ .Values.uiIngress.tls.secretName }}
   {{- end }}
-
+  {{- end }}
 
 ---
 
-{{- if .Values.backendIngress.enabled }}
+  {{- if .Values.backendIngress.enabled }}
 # === BACKEND INGRESS ===
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -44,7 +49,7 @@ spec:
         paths:
           {{- range .Values.backendIngress.routes }}
           - path: {{ .path }}
-            pathType: Prefix
+            pathType: {{ .pathType | default "Prefix" }}
             backend:
               service:
                 name: {{ .targetService }}
@@ -52,4 +57,3 @@ spec:
                   number: {{ .targetPort }}
           {{- end }}
   {{- end }}
-
