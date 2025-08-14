@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: adeeshadev/lugx-gaming-ui
-  tag: latest
+  tag: "b6d2510c7067a40636eda972435c32339bf7abd6"
   pullPolicy: Always
 
 service:
