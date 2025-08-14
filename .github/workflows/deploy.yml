@@ -4,6 +4,9 @@ on:
   push:
     branches: [ master, release, develop ]
 
+permissions:
+  contents: write
+
 env:
   IMAGE_NAME: adeeshadev/lugx-gaming-ui
   IMAGE_TAG: ${{ github.sha }}
