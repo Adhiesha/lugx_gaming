@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: adeeshadev/lugx-gaming-ui
-  tag: "develop-24"
+  tag: "develop-25"
   pullPolicy: Always
 
 service:
